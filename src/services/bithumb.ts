@@ -9,6 +9,7 @@ import {
   IBithumbResponse,
   IGetTransactionHistory,
   IGetAssetsStatus,
+  IGetBtci,
 } from '../interface';
 
 export default class ApiBithumb {
@@ -23,13 +24,10 @@ export default class ApiBithumb {
   }
 
   /**
-   * Bithumb public host
+   * Bithumb public hosts
    */
   private publicHost = 'https://api.bithumb.com/public';
 
-  /**
-   * Bithumb private host
-   */
   private privateHost = 'https://api.bithumb.com/private';
 
   /**
@@ -72,6 +70,15 @@ export default class ApiBithumb {
   }
 
   /**
+   * Provides Bithumb Index (BTMI, BTAI) information.
+   * https://apidocs.bithumb.com/docs/btci
+   */
+  public async getBtci(): Promise<IGetBtci> {
+    const res = <IGetBtci> await this.requestGet('btci', '');
+    return res;
+  }
+
+  /**
    * request get method
    */
   private async requestGet(endpoint: getEndpointType, param: string): Promise<IBithumbResponse> {
@@ -87,7 +94,10 @@ export default class ApiBithumb {
    */
   private checkStatus(res: AxiosResponse<IBithumbResponse>): void {
     if (res.data?.status !== '0000') {
-      throw new Error(`Error: ${JSON.stringify(res)}`);
+      throw new Error(
+        `Error: ${JSON.stringify(res)}
+        Check the documents: https://apidocs.bithumb.com/docs/err_code`,
+      );
     }
   }
 }

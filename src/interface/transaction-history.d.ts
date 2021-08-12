@@ -1,3 +1,5 @@
+import { IBithumbResponse } from './bithumb-response';
+
 interface ITransactionHistory {
   transaction_date: string;
   type: string;
@@ -6,7 +8,6 @@ interface ITransactionHistory {
   total: string;
 }
 
-export interface IGetTransactionHistory {
-  status: string;
+export interface IGetTransactionHistory extends IBithumbResponse {
   data: ITransactionHistory[];
 }

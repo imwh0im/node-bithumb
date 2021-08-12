@@ -4,6 +4,7 @@ export * from './order-book';
 export * from './bithumb-response';
 export * from './transaction-history';
 export * from './assets-status';
+export * from './btci';
 
 // type
 export * from './currency-i18n';

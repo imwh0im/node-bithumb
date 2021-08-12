@@ -1,10 +1,11 @@
+import { IBithumbResponse } from './bithumb-response';
+
 interface IBidAsks {
   quantity: string;
   price: string;
 }
 
-export interface IGetOrderBook {
-  status: string;
+export interface IGetOrderBook extends IBithumbResponse {
   data: {
     timestamp: string;
     order_currency: string;
