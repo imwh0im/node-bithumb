@@ -78,7 +78,7 @@ export default class ApiBithumb {
    * https://apidocs.bithumb.com/docs/btci
    */
   public async getBtci(): Promise<IGetBtci> {
-    const res = <IGetBtci> await this.requestPublic('btci', '');
+    const res = <IGetBtci> await this.requestPublic('btci');
     return res;
   }
 
@@ -97,9 +97,9 @@ export default class ApiBithumb {
   /**
    * request Public API
    */
-  private async requestPublic(endpoint: getEndpointType, param: string): Promise<IBithumbResponse> {
+  private async requestPublic(endpoint: getEndpointType, param?: string): Promise<IBithumbResponse> {
     const res: AxiosResponse<IBithumbResponse> = await axios.get(
-      `${this.hosts.publicHost}/${endpoint}/${param}`,
+      `${this.hosts.publicHost}/${endpoint}/${param || ''}`,
     );
     this.checkStatus(res);
     return res.data;
@@ -108,10 +108,7 @@ export default class ApiBithumb {
   /**
    * request Info API
    */
-  private async requestInfo(
-    endpoint: postEndpointType,
-    params?: Record<string, unknown>,
-  ): Promise<IBithumbResponse> {
+  private async requestInfo(endpoint: postEndpointType, params?: Record<string, unknown>): Promise<IBithumbResponse> {
     const param = {
       params,
       ...{
