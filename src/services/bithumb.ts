@@ -11,6 +11,7 @@ import {
   IGetTransactionHistory,
   IGetAssetsStatus,
   IGetBtci,
+  IPostAccount,
 } from '../interface';
 
 export default class ApiBithumb {
@@ -81,8 +82,16 @@ export default class ApiBithumb {
     return res;
   }
 
-  public async getAccount(coinCode: string) {
-    const res = await this.requestInfo('account',)
+  /**
+   * Provide information on membership and coin transaction fees.
+   * https://apidocs.bithumb.com/docs/account
+   */
+  public async getAccount(coinCode: string): Promise<IPostAccount> {
+    const params = {
+      order_currency: coinCode,
+    };
+    const res = <IPostAccount> await this.requestInfo('account', params);
+    return res;
   }
 
   /**
@@ -99,10 +108,21 @@ export default class ApiBithumb {
   /**
    * request Info API
    */
-  private async requestInfo(endpoint: postEndpointType, param: string): Promise<IBithumbResponse> {
+  private async requestInfo(
+    endpoint: postEndpointType,
+    params?: Record<string, unknown>,
+  ): Promise<IBithumbResponse> {
+    const param = {
+      params,
+      ...{
+        apiKey: this.apiKey,
+        secretKey: this.secretKey,
+        paymentCurrency: this.paymentCurrency,
+      },
+    };
     const res: AxiosResponse<IBithumbResponse> = await axios.post(
-      `${this.hosts.infoHost}/${endpoint}?${param}`,
-
+      `${this.hosts.infoHost}/${endpoint}`,
+      param,
     );
     this.checkStatus(res);
     return res.data;
