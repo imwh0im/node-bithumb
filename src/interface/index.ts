@@ -9,3 +9,4 @@ export * from './btci';
 // type
 export * from './currency-i18n';
 export * from './get-endpoint';
+export * from './post-endpoint';

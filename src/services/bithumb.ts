@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import {
   currencyType,
   getEndpointType,
+  postEndpointType,
 
   IGetTicker,
   IGetOrderBook,
@@ -24,11 +25,13 @@ export default class ApiBithumb {
   }
 
   /**
-   * Bithumb public hosts
+   * Bithumb hosts
    */
-  private publicHost = 'https://api.bithumb.com/public';
-
-  private privateHost = 'https://api.bithumb.com/private';
+  private hosts = {
+    publicHost: 'https://api.bithumb.com/public',
+    infoHost: 'https://api.bithumb.com/info',
+    tradeHost: 'https://api.bithumb.com/trade',
+  };
 
   /**
    * Provides the current price of the asset in the bithumb
@@ -36,7 +39,7 @@ export default class ApiBithumb {
    */
   public async getTicker(coinCode: string): Promise<IGetTicker> {
     const param = `${coinCode}_${this.paymentCurrency}`;
-    const res = <IGetTicker> await this.requestGet('ticker', param);
+    const res = <IGetTicker> await this.requestPublic('ticker', param);
     return res;
   }
 
@@ -46,7 +49,7 @@ export default class ApiBithumb {
    */
   public async getOrderBook(coinCode: string): Promise<IGetOrderBook> {
     const param = `${coinCode}_${this.paymentCurrency}`;
-    const res = <IGetOrderBook> await this.requestGet('orderbook', param);
+    const res = <IGetOrderBook> await this.requestPublic('orderbook', param);
     return res;
   }
 
@@ -56,7 +59,7 @@ export default class ApiBithumb {
    */
   public async getTransactionHistory(coinCode: string): Promise<IGetTransactionHistory> {
     const param = `${coinCode}_${this.paymentCurrency}`;
-    const res = <IGetTransactionHistory> await this.requestGet('transaction_history', param);
+    const res = <IGetTransactionHistory> await this.requestPublic('transaction_history', param);
     return res;
   }
 
@@ -65,7 +68,7 @@ export default class ApiBithumb {
    * https://apidocs.bithumb.com/docs/assets_status
    */
   public async getAssetsStatus(orderCurrency: string): Promise<IGetAssetsStatus> {
-    const res = <IGetAssetsStatus> await this.requestGet('assetsstatus', orderCurrency);
+    const res = <IGetAssetsStatus> await this.requestPublic('assetsstatus', orderCurrency);
     return res;
   }
 
@@ -74,16 +77,32 @@ export default class ApiBithumb {
    * https://apidocs.bithumb.com/docs/btci
    */
   public async getBtci(): Promise<IGetBtci> {
-    const res = <IGetBtci> await this.requestGet('btci', '');
+    const res = <IGetBtci> await this.requestPublic('btci', '');
     return res;
   }
 
+  public async getAccount(coinCode: string) {
+    const res = await this.requestInfo('account',)
+  }
+
   /**
-   * request get method
+   * request Public API
    */
-  private async requestGet(endpoint: getEndpointType, param: string): Promise<IBithumbResponse> {
+  private async requestPublic(endpoint: getEndpointType, param: string): Promise<IBithumbResponse> {
     const res: AxiosResponse<IBithumbResponse> = await axios.get(
-      `${this.publicHost}/${endpoint}/${param}`,
+      `${this.hosts.publicHost}/${endpoint}/${param}`,
+    );
+    this.checkStatus(res);
+    return res.data;
+  }
+
+  /**
+   * request Info API
+   */
+  private async requestInfo(endpoint: postEndpointType, param: string): Promise<IBithumbResponse> {
+    const res: AxiosResponse<IBithumbResponse> = await axios.post(
+      `${this.hosts.infoHost}/${endpoint}?${param}`,
+
     );
     this.checkStatus(res);
     return res.data;
