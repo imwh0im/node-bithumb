@@ -6,6 +6,8 @@ export * from './transaction-history';
 export * from './assets-status';
 export * from './btci';
 export * from './account';
+export * from './balance';
+export * from './wallet-address';
 
 // type
 export * from './currency-i18n';

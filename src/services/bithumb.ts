@@ -12,6 +12,8 @@ import {
   IGetAssetsStatus,
   IGetBtci,
   IPostAccount,
+  IPostBalance,
+  IPostWalletAddress,
 } from '../interface';
 
 export default class ApiBithumb {
@@ -91,6 +93,31 @@ export default class ApiBithumb {
       order_currency: coinCode,
     };
     const res = <IPostAccount> await this.requestInfo('account', params);
+    return res;
+  }
+
+  /**
+   * Provide information on assets held by members.
+   * This API Response could be change the name on the key.
+   * https://apidocs.bithumb.com/docs/balance
+   */
+  public async getBalance(coinCode?: string): Promise<IPostBalance> {
+    const params = {
+      currency: coinCode || 'BTC',
+    };
+    const res = <IPostBalance> await this.requestInfo('balance', params);
+    return res;
+  }
+
+  /**
+   * Provide the address of the member's coin deposit wallet.
+   * https://apidocs.bithumb.com/docs/wallet_address
+   */
+  public async getWalletAddress(coinCode?: string): Promise<IPostWalletAddress> {
+    const params = {
+      currency: coinCode || 'BTC',
+    };
+    const res = <IPostWalletAddress> await this.requestInfo('wallet_address', params);
     return res;
   }
 
