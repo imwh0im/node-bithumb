@@ -1,1 +1,1 @@
-export type postEndpointType = 'account' | 'balance' | 'wallet_address' | 'ticker';
+export type postEndpointType = 'account' | 'balance' | 'wallet_address' | 'ticker' | 'orders';

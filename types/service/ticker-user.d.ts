@@ -17,6 +17,6 @@ interface ITickerUser {
   date: numbee;
 }
 
-export interface IGetTickerUser extends IBithumbResponse {
+export interface IPostTickerUser extends IBithumbResponse {
   data: ITickerUser;
 }

@@ -14,8 +14,10 @@ import {
   IPostAccount,
   IPostBalance,
   IPostWalletAddress,
-  IGetTickerUser,
-} from '../../types';
+  IPostTickerUser,
+  IPostOrdersParams,
+  IPostOrders,
+} from '../../types/service';
 
 export default class ApiBithumb {
   constructor(
@@ -89,7 +91,7 @@ export default class ApiBithumb {
    * Provide information on membership and coin transaction fees.
    * https://apidocs.bithumb.com/docs/account
    */
-  public async getAccount(coinCode: string): Promise<IPostAccount> {
+  public async postAccount(coinCode: string): Promise<IPostAccount> {
     const params = {
       order_currency: coinCode,
     };
@@ -102,7 +104,7 @@ export default class ApiBithumb {
    * This API Response could be change the name on the key.
    * https://apidocs.bithumb.com/docs/balance
    */
-  public async getBalance(coinCode?: string): Promise<IPostBalance> {
+  public async postBalance(coinCode?: string): Promise<IPostBalance> {
     const params = {
       currency: coinCode || 'BTC',
     };
@@ -114,7 +116,7 @@ export default class ApiBithumb {
    * Provide the address of the member's coin deposit wallet.
    * https://apidocs.bithumb.com/docs/wallet_address
    */
-  public async getWalletAddress(coinCode?: string): Promise<IPostWalletAddress> {
+  public async postWalletAddress(coinCode?: string): Promise<IPostWalletAddress> {
     const params = {
       currency: coinCode || 'BTC',
     };
@@ -126,11 +128,23 @@ export default class ApiBithumb {
    * It provides members' virtual asset transaction information.
    * https://apidocs.bithumb.com/docs/ticker_user
    */
-  public async getTickerUser(orderCurrency: string): Promise<IGetTickerUser> {
+  public async postTickerUser(orderCurrency: string): Promise<IPostTickerUser> {
     const params = {
       order_currency: orderCurrency,
     };
-    const res = <IGetTickerUser> await this.requestInfo('ticker', params);
+    const res = <IPostTickerUser> await this.requestInfo('ticker', params);
+    return res;
+  }
+
+  /**
+   * Provide details of the member's purchase/sale registration waiting or transaction.
+   * https://apidocs.bithumb.com/docs/orders
+   */
+  public async postOrders(params: IPostOrdersParams): Promise<IPostOrders> {
+    const param = {
+      ...params,
+    };
+    const res = <IPostOrders> await this.requestInfo('orders', param);
     return res;
   }
 
