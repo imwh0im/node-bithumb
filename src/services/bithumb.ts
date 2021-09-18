@@ -14,7 +14,8 @@ import {
   IPostAccount,
   IPostBalance,
   IPostWalletAddress,
-} from '../interface';
+  IGetTickerUser,
+} from '../../types';
 
 export default class ApiBithumb {
   constructor(
@@ -118,6 +119,18 @@ export default class ApiBithumb {
       currency: coinCode || 'BTC',
     };
     const res = <IPostWalletAddress> await this.requestInfo('wallet_address', params);
+    return res;
+  }
+
+  /**
+   * It provides members' virtual asset transaction information.
+   * https://apidocs.bithumb.com/docs/ticker_user
+   */
+  public async getTickerUser(orderCurrency: string): Promise<IGetTickerUser> {
+    const params = {
+      order_currency: orderCurrency,
+    };
+    const res = <IGetTickerUser> await this.requestInfo('ticker', params);
     return res;
   }
 

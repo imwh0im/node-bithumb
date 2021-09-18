@@ -37,6 +37,7 @@
         "function-call-argument-newline": ["error", "consistent"],
         "capitalized-comments": "off",
         "sort-keys": "off",
-        "function-paren-newline": ["warn", "consistent"]
+        "function-paren-newline": ["warn", "consistent"],
+        "semi": "warn"
     }
 }
