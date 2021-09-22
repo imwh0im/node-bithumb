@@ -148,6 +148,10 @@ export default class ApiBithumb {
     return res;
   }
 
+  /**
+   * Provide details of the member's purchase/sale details.
+   * https://apidocs.bithumb.com/docs/orders_detail
+   */
   public async postOrdersDetail(params: IPostOrdersParams): Promise<IPostOrders> {
     const param = {
       ...params,
