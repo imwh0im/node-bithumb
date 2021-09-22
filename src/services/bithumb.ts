@@ -148,6 +148,14 @@ export default class ApiBithumb {
     return res;
   }
 
+  public async postOrdersDetail(params: IPostOrdersParams): Promise<IPostOrders> {
+    const param = {
+      ...params,
+    };
+    const res = <IPostOrders> await this.requestInfo('orders', param);
+    return res;
+  }
+
   /**
    * request Public API
    */
