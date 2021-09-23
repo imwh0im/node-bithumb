@@ -1,5 +1,5 @@
 export interface IPostOrdersParams {
-  orderOd?: string;
+  orderId?: string;
   type?: 'bid' | 'ask';
   count?: number;
   after?: number;

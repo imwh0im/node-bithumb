@@ -11,6 +11,7 @@ export * from './wallet-address';
 export * from './ticker-user';
 export * from './post-orders-param';
 export * from './orders';
+export * from './order-detail';
 
 // type
 export * from './currency-i18n';

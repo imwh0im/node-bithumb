@@ -17,6 +17,7 @@ import {
   IPostTickerUser,
   IPostOrdersParams,
   IPostOrders,
+  IPostOrderDetail,
 } from '../../types/service';
 
 export default class ApiBithumb {
@@ -152,12 +153,22 @@ export default class ApiBithumb {
    * Provide details of the member's purchase/sale details.
    * https://apidocs.bithumb.com/docs/orders_detail
    */
-  public async postOrdersDetail(params: IPostOrdersParams): Promise<IPostOrders> {
+  public async postOrderDetail(orderId: string, orderCurrency: string): Promise<IPostOrderDetail> {
     const param = {
-      ...params,
+      orderId,
+      order_currency: orderCurrency,
     };
-    const res = <IPostOrders> await this.requestInfo('orders', param);
+    const res = <IPostOrderDetail> await this.requestInfo('order_detail', param);
     return res;
+  }
+
+  public async postUserTransctions(searchGb: number, orderCurrency: string, offset: number, count = 2) {
+    const param = {
+      searchGb,
+      order_currency: orderCurrency,
+      offset,
+      count,
+    };
   }
 
   /**
