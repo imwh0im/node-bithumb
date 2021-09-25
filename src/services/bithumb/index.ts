@@ -4,6 +4,7 @@ import {
   currencyType,
   getEndpointType,
   postEndpointType,
+  tradeType,
 
   IGetTicker,
   IGetOrderBook,
@@ -20,6 +21,7 @@ import {
   IPostOrderDetail,
   IPostUserTransactions,
   IPostPlace,
+  IPostCancel,
 } from '../../../types/service/bithumb';
 
 export default class ApiBithumb {
@@ -183,7 +185,7 @@ export default class ApiBithumb {
    * It provides a designated price purchase/sale registration function.
    * https://apidocs.bithumb.com/docs/place
    */
-  public async postPlace(orderCurrency: string, units: number, price: number, type: 'ask' | 'bid'): Promise<IPostPlace> {
+  public async postPlace(orderCurrency: string, units: number, price: number, type: tradeType): Promise<IPostPlace> {
     const param = {
       order_currency: orderCurrency,
       units,
@@ -191,6 +193,20 @@ export default class ApiBithumb {
       type,
     };
     const res = <IPostPlace> await this.requestTrade('place', param);
+    return res;
+  }
+
+  /**
+   * It provides a registered purchase/sale order cancellation function.
+   * https://apidocs.bithumb.com/docs/cancel
+   */
+  public async postCancel(type: tradeType, orderId: string, orderCurrency: string): Promise<IPostCancel> {
+    const param = {
+      type,
+      order_id: orderId,
+      order_currency: orderCurrency,
+    };
+    const res = <IPostCancel> await this.requestTrade('cancel', param);
     return res;
   }
 

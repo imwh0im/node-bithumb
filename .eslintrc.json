@@ -20,7 +20,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "camelcase": "off",
+        "camelcase": ["warn", { "properties": "never" }],
         "import/no-unresolved": "off",
         "import/extensions": "off",
         "class-methods-use-this": "off",
@@ -40,6 +40,8 @@
         "function-paren-newline": ["warn", "consistent"],
         "semi": "warn",
         "max-params": ["warn", 4],
-        "no-magic-numbers": "off"
+        "no-magic-numbers": "off",
+        "@typescript-eslint/require-await": "warn",
+        "@typescript-eslint/no-empty-interface": "off"
     }
 }

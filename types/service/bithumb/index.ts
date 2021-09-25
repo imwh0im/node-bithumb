@@ -14,8 +14,10 @@ export * from './orders';
 export * from './order-detail';
 export * from './user-transactions';
 export * from './place';
+export * from './cancel';
 
 // type
 export * from './currency-i18n';
 export * from './get-endpoint';
 export * from './post-endpoint';
+export * from './trade-type';
