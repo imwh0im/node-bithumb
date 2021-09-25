@@ -179,6 +179,10 @@ export default class ApiBithumb {
     return res;
   }
 
+  /**
+   * It provides a designated price purchase/sale registration function.
+   * https://apidocs.bithumb.com/docs/place
+   */
   public async postPlace(orderCurrency: string, units: number, price: number, type: 'ask' | 'bid'): Promise<IPostPlace> {
     const param = {
       order_currency: orderCurrency,
