@@ -22,6 +22,7 @@ import {
   IPostUserTransactions,
   IPostPlace,
   IPostCancel,
+  IPostMarketBuy,
 } from '../../../types/service/bithumb';
 
 export default class ApiBithumb {
@@ -207,6 +208,19 @@ export default class ApiBithumb {
       order_currency: orderCurrency,
     };
     const res = <IPostCancel> await this.requestTrade('cancel', param);
+    return res;
+  }
+
+  /**
+   * It provides market price buying.
+   * https://apidocs.bithumb.com/docs/market_buy
+   */
+  public async postMarketBuy(units: number, orderCurrency: string): Promise<IPostMarketBuy> {
+    const param = {
+      units,
+      order_currency: orderCurrency,
+    };
+    const res = <IPostMarketBuy> await this.requestTrade('market_buy', param);
     return res;
   }
 
