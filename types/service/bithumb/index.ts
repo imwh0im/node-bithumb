@@ -17,6 +17,7 @@ export * from './place';
 export * from './cancel';
 export * from './market-buy';
 export * from './market-sell';
+export * from './withdrawal-coin';
 
 // type
 export * from './currency-i18n';

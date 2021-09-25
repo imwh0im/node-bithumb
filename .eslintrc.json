@@ -45,6 +45,7 @@
         "@typescript-eslint/no-empty-interface": "off",
         "no-trailing-spaces": "warn",
         "@typescript-eslint/no-empty-function": "warn",
-        "max-lines": "off"
+        "max-lines": "off",
+        "default-param-last": "off"
     }
 }

@@ -24,9 +24,10 @@ import {
   IPostCancel,
   IPostMarketBuy,
   IPostMarketSell,
+  IPostWithdrawalCoin,
 } from '../../../types/service/bithumb';
 
-export default class ApiBithumb {
+export class ApiBithumb {
   constructor(
     private apiKey: string,
     private secretKey: string,
@@ -235,6 +236,21 @@ export default class ApiBithumb {
       order_currency: orderCurrency,
     };
     const res = <IPostMarketSell> await this.requestTrade('market_sell', param);
+    return res;
+  }
+
+  /**
+   * provides a virtual asset withdrawal application function.
+   * https://apidocs.bithumb.com/docs/withdrawal_coin
+   */
+  public async postWithdrawalCoin(units: number, address: string, currency = 'BTC', desination?: string): Promise<IPostWithdrawalCoin> {
+    const param = {
+      units,
+      address,
+      currency,
+      desination,
+    };
+    const res = <IPostWithdrawalCoin> await this.requestTrade('btc_withdrawal', param);
     return res;
   }
 
