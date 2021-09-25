@@ -25,6 +25,7 @@ import {
   IPostMarketBuy,
   IPostMarketSell,
   IPostWithdrawalCoin,
+  IPostWithDrawalKrw,
 } from '../../../types/service/bithumb';
 
 export class ApiBithumb {
@@ -251,6 +252,20 @@ export class ApiBithumb {
       desination,
     };
     const res = <IPostWithdrawalCoin> await this.requestTrade('btc_withdrawal', param);
+    return res;
+  }
+
+  /**
+   * provides a KRW withdrawal application function.
+   * https://apidocs.bithumb.com/docs/withdrawal_krw
+   */
+  public async postWithdrawalKrw(bank: string, account: string, price: number): Promise<IPostWithDrawalKrw> {
+    const param = {
+      bank,
+      account,
+      price,
+    };
+    const res = <IPostWithDrawalKrw> await this.requestTrade('krw_withdrawal', param);
     return res;
   }
 

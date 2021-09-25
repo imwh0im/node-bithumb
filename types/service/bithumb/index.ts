@@ -18,6 +18,7 @@ export * from './cancel';
 export * from './market-buy';
 export * from './market-sell';
 export * from './withdrawal-coin';
+export * from './withdrawal-krw';
 
 // type
 export * from './currency-i18n';
