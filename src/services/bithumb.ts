@@ -163,6 +163,10 @@ export default class ApiBithumb {
     return res;
   }
 
+  /**
+   * Provide information on the member's transaction completion history.
+   * https://apidocs.bithumb.com/docs/transactions
+   */
   public async postUserTransctions(searchGb: number, orderCurrency: string, offset: number, count = 20): Promise<IPostUserTransactions> {
     const param = {
       searchGb,
