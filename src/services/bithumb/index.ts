@@ -23,6 +23,7 @@ import {
   IPostPlace,
   IPostCancel,
   IPostMarketBuy,
+  IPostMarketSell,
 } from '../../../types/service/bithumb';
 
 export default class ApiBithumb {
@@ -131,7 +132,7 @@ export default class ApiBithumb {
   }
 
   /**
-   * It provides members' virtual asset transaction information.
+   * provides members' virtual asset transaction information.
    * https://apidocs.bithumb.com/docs/ticker_user
    */
   public async postTickerUser(orderCurrency: string): Promise<IPostTickerUser> {
@@ -183,7 +184,7 @@ export default class ApiBithumb {
   }
 
   /**
-   * It provides a designated price purchase/sale registration function.
+   * provides a designated price purchase/sale registration function.
    * https://apidocs.bithumb.com/docs/place
    */
   public async postPlace(orderCurrency: string, units: number, price: number, type: tradeType): Promise<IPostPlace> {
@@ -198,7 +199,7 @@ export default class ApiBithumb {
   }
 
   /**
-   * It provides a registered purchase/sale order cancellation function.
+   * provides a registered purchase/sale order cancellation function.
    * https://apidocs.bithumb.com/docs/cancel
    */
   public async postCancel(type: tradeType, orderId: string, orderCurrency: string): Promise<IPostCancel> {
@@ -212,7 +213,7 @@ export default class ApiBithumb {
   }
 
   /**
-   * It provides market price buying.
+   * provides market price buying.
    * https://apidocs.bithumb.com/docs/market_buy
    */
   public async postMarketBuy(units: number, orderCurrency: string): Promise<IPostMarketBuy> {
@@ -221,6 +222,19 @@ export default class ApiBithumb {
       order_currency: orderCurrency,
     };
     const res = <IPostMarketBuy> await this.requestTrade('market_buy', param);
+    return res;
+  }
+
+  /**
+   * provides market price selling function.
+   * https://apidocs.bithumb.com/docs/market_sell
+   */
+  public async postMarketSell(units: number, orderCurrency: string): Promise<IPostMarketSell> {
+    const param = {
+      units,
+      order_currency: orderCurrency,
+    };
+    const res = <IPostMarketSell> await this.requestTrade('market_sell', param);
     return res;
   }
 
