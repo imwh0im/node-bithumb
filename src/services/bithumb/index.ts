@@ -19,7 +19,8 @@ import {
   IPostOrders,
   IPostOrderDetail,
   IPostUserTransactions,
-} from '../../types/service';
+  IPostPlace,
+} from '../../../types/service/bithumb';
 
 export default class ApiBithumb {
   constructor(
@@ -178,6 +179,17 @@ export default class ApiBithumb {
     return res;
   }
 
+  public async postPlace(orderCurrency: string, units: number, price: number, type: 'ask' | 'bid'): Promise<IPostPlace> {
+    const param = {
+      order_currency: orderCurrency,
+      units,
+      price,
+      type,
+    };
+    const res = <IPostPlace> await this.requestTrade('place', param);
+    return res;
+  }
+
   /**
    * request Public API
    */
@@ -198,11 +210,31 @@ export default class ApiBithumb {
       ...{
         apiKey: this.apiKey,
         secretKey: this.secretKey,
-        paymentCurrency: this.paymentCurrency,
+        payment_currency: this.paymentCurrency,
       },
     };
     const res: AxiosResponse<IBithumbResponse> = await axios.post(
       `${this.hosts.infoHost}/${endpoint}`,
+      param,
+    );
+    this.checkStatus(res);
+    return res.data;
+  }
+
+  /**
+   * request Trade API
+   */
+  private async requestTrade(endpoint: postEndpointType, params?: Record<string, unknown>): Promise<IBithumbResponse> {
+    const param = {
+      params,
+      ...{
+        apiKey: this.apiKey,
+        secretKey: this.secretKey,
+        payment_currency: this.paymentCurrency,
+      },
+    };
+    const res: AxiosResponse<IBithumbResponse> = await axios.post(
+      `${this.hosts.tradeHost}/${endpoint}`,
       param,
     );
     this.checkStatus(res);

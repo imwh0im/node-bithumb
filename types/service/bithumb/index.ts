@@ -13,6 +13,7 @@ export * from './post-orders-param';
 export * from './orders';
 export * from './order-detail';
 export * from './user-transactions';
+export * from './place';
 
 // type
 export * from './currency-i18n';
