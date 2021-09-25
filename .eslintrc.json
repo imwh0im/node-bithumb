@@ -24,7 +24,7 @@
         "import/no-unresolved": "off",
         "import/extensions": "off",
         "class-methods-use-this": "off",
-        "max-len": [1, 120, 4],
+        "max-len": [1, 140, 4],
         "indent": ["warn", 2],
         "object-curly-spacing": ["warn", "always"],
         "quotes": ["warn", "single"],
@@ -38,6 +38,8 @@
         "capitalized-comments": "off",
         "sort-keys": "off",
         "function-paren-newline": ["warn", "consistent"],
-        "semi": "warn"
+        "semi": "warn",
+        "max-params": ["warn", 4],
+        "no-magic-numbers": "off"
     }
 }

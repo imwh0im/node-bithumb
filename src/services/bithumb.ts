@@ -18,6 +18,7 @@ import {
   IPostOrdersParams,
   IPostOrders,
   IPostOrderDetail,
+  IPostUserTransactions,
 } from '../../types/service';
 
 export default class ApiBithumb {
@@ -162,13 +163,15 @@ export default class ApiBithumb {
     return res;
   }
 
-  public async postUserTransctions(searchGb: number, orderCurrency: string, offset: number, count = 2) {
+  public async postUserTransctions(searchGb: number, orderCurrency: string, offset: number, count = 20): Promise<IPostUserTransactions> {
     const param = {
       searchGb,
       order_currency: orderCurrency,
       offset,
       count,
     };
+    const res = <IPostUserTransactions> await this.requestInfo('user_transactions', param);
+    return res;
   }
 
   /**

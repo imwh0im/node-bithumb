@@ -12,6 +12,7 @@ export * from './ticker-user';
 export * from './post-orders-param';
 export * from './orders';
 export * from './order-detail';
+export * from './user-transactions';
 
 // type
 export * from './currency-i18n';
