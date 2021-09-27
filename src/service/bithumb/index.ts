@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import * as crypto from 'crypto';
 
 import {
   currencyType,
