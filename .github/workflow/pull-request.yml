@@ -11,5 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: v16.x
-    - run: npm i && npm run lint && npm run build
+        node-version: "16"
+    - run: npm i
+    - run: npm run lint
+    - run: npm run build
