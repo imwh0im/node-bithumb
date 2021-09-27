@@ -1,5 +1,5 @@
 import { IBithumbResponse } from './bithumb-response';
-import { currencyType } from './currency-i18n'
+import { currencyType } from './currency-i18n';
 
 interface IContract {
   transaction_date: string;

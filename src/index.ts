@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios';
-import * as crypto from 'crypto';
 
 import {
   currencyType,
@@ -27,7 +26,7 @@ import {
   IPostMarketSell,
   IPostWithdrawalCoin,
   IPostWithDrawalKrw,
-} from '../types/service/bithumb';
+} from '../types';
 
 export default class ApiBithumb {
   constructor(

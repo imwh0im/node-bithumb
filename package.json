@@ -1,11 +1,12 @@
 {
   "name": "node-bithumb",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "NodeJS wrapped for Bithumb API",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "typings": "src/index.ts",
   "scripts": {
     "build": "rm -rf ./dist & tsc",
+    "deploy": "npm i && npm run lint && npm run build && npm publish",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "test": "jest"
