@@ -1,8 +1,9 @@
 {
-  "name": "bithumb",
-  "version": "1.0.0",
+  "name": "node-bithumb",
+  "version": "0.0.1",
   "description": "NodeJS wrapped for Bithumb API",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "src/index.ts",
   "scripts": {
     "build": "rm -rf ./dist & tsc",
     "lint": "eslint . --ext .ts",
@@ -14,7 +15,7 @@
     "url": "git+https://github.com/imwh0im/node-bithumb.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/imwh0im/node-bithumb/issues"
   },
