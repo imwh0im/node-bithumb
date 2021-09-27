@@ -1,6 +1,6 @@
 {
   "name": "node-bithumb",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "NodeJS wrapped for Bithumb API",
   "main": "dist/index.js",
   "typings": "src/index.ts",
@@ -20,6 +20,17 @@
     "url": "https://github.com/imwh0im/node-bithumb/issues"
   },
   "homepage": "https://github.com/imwh0im/node-bithumb#readme",
+  "keywords": [
+    "quant",
+    "bithumb",
+    "bithumb api",
+    "bithumb sdk",
+    "bithumb typescript",
+    "bithumb node",
+    "bitcoin",
+    "bitcoin trade",
+    "bitcoin api"
+  ],
   "devDependencies": {
     "@types/node": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
