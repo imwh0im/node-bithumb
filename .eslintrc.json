@@ -46,6 +46,7 @@
         "no-trailing-spaces": "warn",
         "@typescript-eslint/no-empty-function": "warn",
         "max-lines": "off",
-        "default-param-last": "off"
+        "default-param-last": "off",
+        "dot-location": ["warn", "property"]
     }
 }

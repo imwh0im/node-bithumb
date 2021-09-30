@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import crypto from 'crypto';
 
 import {
   currencyType,
@@ -292,8 +293,10 @@ export default class ApiBithumb {
         payment_currency: this.paymentCurrency,
       },
     };
+    const headers = this.getBithumbHeaders(endpoint, param);
     const res: AxiosResponse<IBithumbResponse> = await axios.post(
       `${this.hosts.infoHost}/${endpoint}`,
+      headers,
       param,
     );
     this.checkStatus(res);
@@ -312,8 +315,10 @@ export default class ApiBithumb {
         payment_currency: this.paymentCurrency,
       },
     };
+    const headers = this.getBithumbHeaders(endpoint, param);
     const res: AxiosResponse<IBithumbResponse> = await axios.post(
       `${this.hosts.tradeHost}/${endpoint}`,
+      headers,
       param,
     );
     this.checkStatus(res);
@@ -330,5 +335,19 @@ export default class ApiBithumb {
         Check the documents: https://apidocs.bithumb.com/docs/err_code`,
       );
     }
+  }
+
+  private getBithumbHeaders(endpoint: string, parameters: Record<string, unknown> = {}) {
+    const nonce = new Date().getTime();
+    const requestSignature = `${endpoint}${String.fromCharCode(0)}${JSON.stringify(parameters)}${String.fromCharCode(0)}${nonce}`;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const hmacSignature = Buffer.from(crypto.createHmac('sha512', this.secretKey).update(requestSignature)
+      .digest('hex')).toString('base64');
+    return {
+      'Api-Key': this.apiKey,
+      'Api-Sign': hmacSignature,
+      'Api-Nonce': nonce,
+    };
   }
 }
