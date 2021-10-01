@@ -1,6 +1,8 @@
-<a href="https://www.npmjs.com/package/node-bithumb">
-    <img src="https://img.shields.io/npm/v/node-bithumb.svg?style=flat-square&colorB=51C838" alt="NPM Version" \>
-</a>
+<p align="center">
+    <a href="https://www.npmjs.com/package/node-bithumb">
+        <img src="https://img.shields.io/npm/v/node-bithumb.svg?style=flat-square&colorB=51C838" alt="NPM Version" \>
+    </a>
+</p>
 
 # node-bithumb
 - NodeJS wrapped for [Bithumb API](https://apidocs.bithumb.com/)
