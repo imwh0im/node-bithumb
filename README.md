@@ -11,6 +11,7 @@
 - NodeJS wrapped for [Bithumb API](https://apidocs.bithumb.com/)
 - See [NPM](https://www.npmjs.com/package/node-bithumb)
 
+---
 ## Description
 - Typescript Support
 - SDK for bithumb API
