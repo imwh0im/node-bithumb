@@ -1,6 +1,6 @@
 {
   "name": "node-bithumb",
-  "version": "0.0.7",
+  "version": "0.0.0-development",
   "description": "NodeJS wrapped for Bithumb API",
   "main": "dist/src/index.js",
   "typings": "src/index.ts",
