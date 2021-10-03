@@ -27,6 +27,7 @@ import {
   IPostMarketSell,
   IPostWithdrawalCoin,
   IPostWithDrawalKrw,
+  IBalanceResponse,
 } from '../types';
 
 export default class ApiBithumb {
@@ -114,12 +115,13 @@ export default class ApiBithumb {
    * This API Response could be change the name on the key.
    * https://apidocs.bithumb.com/docs/balance
    */
-  public async postBalance(coinCode?: string): Promise<IPostBalance> {
+  public async postBalance(coinCode = 'BTC'): Promise<IPostBalance> {
     const params = {
-      currency: coinCode || 'BTC',
+      currency: coinCode,
     };
-    const res = <IPostBalance> await this.requestInfo('balance', params);
-    return res;
+    const res = <IBalanceResponse> await this.requestInfo('balance', params);
+    const data = this.refineBalance(res, coinCode);
+    return data;
   }
 
   /**
@@ -349,5 +351,21 @@ export default class ApiBithumb {
       'Api-Sign': hmacSignature,
       'Api-Nonce': nonce,
     };
+  }
+
+  private refineBalance(res: IBalanceResponse, coinCode: string) {
+    const data: IPostBalance = {
+      ...res,
+      data: {
+        total_coin: res.data[`total_${coinCode}`],
+        total_krw: res.data.total_krw,
+        in_use_coin: res.data[`in_use_${coinCode}`],
+        in_use_krw: res.data.in_use_krw,
+        available_coin: res.data[`available_${coinCode}`],
+        available_krw: res.data.available_krw,
+        xcoin_last_coin: res.data[`xcoin_last_${coinCode}`],
+      },
+    };
+    return data;
   }
 }

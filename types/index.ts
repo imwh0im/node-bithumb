@@ -7,6 +7,7 @@ export * from './assets-status';
 export * from './btci';
 export * from './account';
 export * from './balance';
+export * from './balance-res';
 export * from './wallet-address';
 export * from './ticker-user';
 export * from './post-orders-param';
