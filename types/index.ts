@@ -20,6 +20,7 @@ export * from './market-buy';
 export * from './market-sell';
 export * from './withdrawal-coin';
 export * from './withdrawal-krw';
+export * from './bithumb-error-response';
 
 // type
 export * from './currency-i18n';

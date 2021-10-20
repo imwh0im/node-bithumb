@@ -47,6 +47,7 @@
         "@typescript-eslint/no-empty-function": "warn",
         "max-lines": "off",
         "default-param-last": "off",
-        "dot-location": ["warn", "property"]
+        "dot-location": ["warn", "property"],
+        "no-useless-constructor": "off"
     }
 }
