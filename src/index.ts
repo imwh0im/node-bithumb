@@ -29,8 +29,7 @@ import {
   IPostWithdrawalCoin,
   IPostWithDrawalKrw,
   IBalanceResponse,
-  IBtciData,
-  IBithumbErrorResponse
+  IBithumbErrorResponse,
 } from '../types';
 
 export default class ApiBithumb {
@@ -177,7 +176,7 @@ export default class ApiBithumb {
    * https://apidocs.bithumb.com/docs/transactions
    */
   public async postUserTransctions(
-    searchGb: number, orderCurrency: string, offset?: number, count?: number
+    searchGb: number, orderCurrency: string, offset?: number, count?: number,
   ): Promise<IPostUserTransactions> {
     const param = {
       searchGb,
