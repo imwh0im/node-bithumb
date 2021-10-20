@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import crypto from 'crypto';
-import querystring from 'querystring';
+import quertString from 'query-string';
 
 import {
   currencyType,
@@ -340,9 +340,7 @@ export default class ApiBithumb {
 
   private getBithumbHeaders(endpoint: string, parameters = {}) {
     const nonce = new Date().getTime();
-    const requestSignature = `${endpoint}${String.fromCharCode(0)}${querystring.stringify(parameters)}${String.fromCharCode(0)}${nonce}`;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const requestSignature = `${endpoint}${String.fromCharCode(0)}${quertString.stringify(parameters)}${String.fromCharCode(0)}${nonce}`;
     const hmacSignature = Buffer.from(crypto.createHmac('sha512', this.secretKey).update(requestSignature)
       .digest('hex')).toString('base64');
     return {

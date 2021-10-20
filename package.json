@@ -52,7 +52,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "crypto": "^1.0.1",
     "jest": "^27.2.2",
-    "crypto": "^1.0.1"
+    "query-string": "^7.0.1"
   }
 }
