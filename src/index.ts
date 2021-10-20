@@ -339,8 +339,14 @@ export default class ApiBithumb {
   }
 
   private getBithumbHeaders(endpoint: string, parameters = {}) {
+    const parameter = {
+      parameters,
+      ...{
+        endpoint,
+      },
+    };
     const nonce = new Date().getTime();
-    const requestSignature = `${endpoint}${String.fromCharCode(0)}${quertString.stringify(parameters)}${String.fromCharCode(0)}${nonce}`;
+    const requestSignature = `${endpoint}${String.fromCharCode(0)}${quertString.stringify(parameter)}${String.fromCharCode(0)}${nonce}`;
     const hmacSignature = Buffer.from(crypto.createHmac('sha512', this.secretKey).update(requestSignature)
       .digest('hex')).toString('base64');
     return {
