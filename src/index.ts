@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import crypto from 'crypto';
-import quertString from 'query-string';
+import queryString from 'query-string';
 
 import {
   currencyType,
@@ -29,6 +29,8 @@ import {
   IPostWithdrawalCoin,
   IPostWithDrawalKrw,
   IBalanceResponse,
+  IBtciData,
+  IBithumbErrorResponse
 } from '../types';
 
 export default class ApiBithumb {
@@ -36,11 +38,7 @@ export default class ApiBithumb {
     private apiKey: string,
     private secretKey: string,
     private paymentCurrency: currencyType,
-  ) {
-    this.apiKey = apiKey;
-    this.secretKey = secretKey;
-    this.paymentCurrency = paymentCurrency;
-  }
+  ) {}
 
   /**
    * Bithumb hosts
@@ -178,7 +176,9 @@ export default class ApiBithumb {
    * Provide information on the member's transaction completion history.
    * https://apidocs.bithumb.com/docs/transactions
    */
-  public async postUserTransctions(searchGb: number, orderCurrency: string, offset: number, count = 20): Promise<IPostUserTransactions> {
+  public async postUserTransctions(
+    searchGb: number, orderCurrency: string, offset?: number, count?: number
+  ): Promise<IPostUserTransactions> {
     const param = {
       searchGb,
       order_currency: orderCurrency,
@@ -277,9 +277,10 @@ export default class ApiBithumb {
    * request Public API
    */
   private async requestPublic(endpoint: getEndpointType, param?: string): Promise<IBithumbResponse> {
-    const res: AxiosResponse<IBithumbResponse> = await axios.get(
-      `${this.hosts.publicHost}/${endpoint}/${param || ''}`,
-    );
+    const res = <AxiosResponse<IBithumbResponse>> await axios({
+      method: 'GET',
+      url: `${this.hosts.publicHost}/${endpoint}/${param || ''}`,
+    });
     this.checkStatus(res);
     return res.data;
   }
@@ -287,18 +288,15 @@ export default class ApiBithumb {
   /**
    * request Info API
    */
-  private async requestInfo(endpoint: postEndpointType, params?: Record<string, unknown>): Promise<IBithumbResponse> {
-    const param = {
-      params,
-      ...{
-        payment_currency: this.paymentCurrency,
-      },
-    };
+  private async requestInfo(endpoint: postEndpointType, params: Record<string, unknown> = {}): Promise<IBithumbResponse> {
+    const param = Object.assign(params, {
+      payment_currency: this.paymentCurrency,
+    });
     const headers = this.getBithumbHeaders(`/info/${endpoint}`, param);
     const res = <AxiosResponse<IBithumbResponse>> await axios({
       method: 'POST',
       url: `${this.hosts.infoHost}/${endpoint}`,
-      data: param,
+      data: queryString.stringify(param),
       headers,
     });
     this.checkStatus(res);
@@ -308,18 +306,15 @@ export default class ApiBithumb {
   /**
    * request Trade API
    */
-  private async requestTrade(endpoint: postEndpointType, params?: Record<string, unknown>): Promise<IBithumbResponse> {
-    const param = {
-      params,
-      ...{
-        payment_currency: this.paymentCurrency,
-      },
-    };
+  private async requestTrade(endpoint: postEndpointType, params: Record<string, unknown> = {}): Promise<IBithumbResponse> {
+    const param = Object.assign(params, {
+      payment_currency: this.paymentCurrency,
+    });
     const headers = this.getBithumbHeaders(`/trade/${endpoint}`, param);
     const res = <AxiosResponse<IBithumbResponse>> await axios({
       method: 'POST',
       url: `${this.hosts.tradeHost}/${endpoint}`,
-      data: param,
+      data: queryString.stringify(param),
       headers,
     });
     this.checkStatus(res);
@@ -329,26 +324,24 @@ export default class ApiBithumb {
   /**
    * Check the status and throw
    */
-  private checkStatus(res: AxiosResponse<IBithumbResponse>): void {
+  private checkStatus(res: AxiosResponse<IBithumbResponse>) {
     if (res.data?.status !== '0000') {
+      const errRes = <IBithumbErrorResponse> res.data;
       throw new Error(
-        `Error: ${JSON.stringify(res)}
-        Check the documents: https://apidocs.bithumb.com/docs/err_code`,
+        `${JSON.stringify(errRes)} [Check the documents: https://apidocs.bithumb.com/docs/err_code]`,
       );
     }
   }
 
-  private getBithumbHeaders(endpoint: string, parameters = {}) {
-    const parameter = {
-      parameters,
-      ...{
-        endpoint,
-      },
-    };
+  private getBithumbHeaders(endpoint: string, parameters: Record<string, unknown> = {}) {
     const nonce = new Date().getTime();
-    const requestSignature = `${endpoint}${String.fromCharCode(0)}${quertString.stringify(parameter)}${String.fromCharCode(0)}${nonce}`;
-    const hmacSignature = Buffer.from(crypto.createHmac('sha512', this.secretKey).update(requestSignature)
-      .digest('hex')).toString('base64');
+    const requestSignature = `${endpoint}${String.fromCharCode(0)}${queryString.stringify(parameters)}${String.fromCharCode(0)}${nonce}`;
+    const hmacSignature = Buffer.from(
+      crypto.createHmac('sha512', this.secretKey)
+        .update(requestSignature)
+        .digest('hex'),
+    ).toString('base64');
+
     return {
       'Api-Key': this.apiKey,
       'Api-Sign': hmacSignature,
