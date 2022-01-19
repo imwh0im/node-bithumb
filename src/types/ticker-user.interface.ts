@@ -1,9 +1,9 @@
-import { IBithumbResponse } from './bithumb-response';
-import { currecnyType } from './currency-i18n';
+import { IBithumbResponse } from './bithumb-response.interface';
+import { currencyType } from './currency-i18n.interface';
 
 interface ITickerUser {
   order_currency: string;
-  payment_currency: currecnyType;
+  payment_currency: currencyType;
   opening_price: string;
   closing_price: string;
   min_price: string;
@@ -14,7 +14,7 @@ interface ITickerUser {
   volume_7day: string;
   fluctate_24H: string;
   fluctate_rate_24H: string
-  date: numbee;
+  date: number;
 }
 
 export interface IPostTickerUser extends IBithumbResponse {

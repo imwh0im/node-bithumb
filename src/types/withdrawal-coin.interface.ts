@@ -1,3 +1,3 @@
-import { IBithumbResponse } from './bithumb-response';
+import { IBithumbResponse } from './bithumb-response.interface';
 
 export interface IPostWithdrawalCoin extends IBithumbResponse {}
