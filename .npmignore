@@ -1,3 +1,7 @@
 src/
 tsconfig.json
 release.config.js
+.eslintignore
+.eslintrc.json
+package-lock.json
+.github/
