@@ -2,7 +2,12 @@ module.exports = {
   branches: ['main', 'next'],
   'plugin': [
     '@semantic-release/npm',
-    '@semantic-release/git',
+    [
+      '@semantic-release/git', {
+        'assets': ['package.json'],
+        'message': 'chore(release): published package version',
+      },
+    ],
     [
       '@semantic-releaes/github', {
         'successComment': ':tada: This ${issue.pull_request ? "PR is included" : "issue has been resolved"} in'
