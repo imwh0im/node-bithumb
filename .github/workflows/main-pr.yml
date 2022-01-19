@@ -22,7 +22,7 @@ jobs:
 
     - name: Install
       run: |
-        npm install
+        npm ci
 
     - name: Lint
       run: |
