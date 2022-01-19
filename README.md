@@ -27,7 +27,7 @@ import ApiBithumb from "node-bithumb";
 
 const BithumbApi = new ApiBithumb("apiKey", "secetKey", "BTC");
 
-// {httpMethod}{ApiEndpoint(to camel case)} [eg. post, order_detail => postOrderDetail()]
+/** {httpMethod}{ApiEndpoint(to camel case)} [eg. post, order_detail => postOrderDetail()] */
 const buyRes = await BithumbApi.postMarketBuy(10, "ETH");
 const sellRes = await BithumbApi.postMarketSell(10, "ETH");
 ```
