@@ -9,7 +9,6 @@ interface IContract {
   fee: string;
   total: string;
 }
-
 interface IOrderDetail {
   transction_date: string;
   type: 'bid' | 'ask';
