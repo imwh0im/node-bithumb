@@ -21,9 +21,12 @@ export * from './market-sell.interface';
 export * from './withdrawal-coin.interface';
 export * from './withdrawal-krw.interface';
 export * from './bithumb-error-response.interface';
+export * from './get-candlestick.interface';
+export * from './get-candlestick-data.interface';
 
 // type
 export * from './currency-i18n.interface';
 export * from './get-endpoint.interface';
 export * from './post-endpoint.interface';
 export * from './trade-type.interface';
+export * from './get-candlestick-time.interface';

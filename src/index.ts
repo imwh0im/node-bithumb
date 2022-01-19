@@ -30,6 +30,9 @@ import {
   IPostWithDrawalKrw,
   IBalanceResponse,
   IBithumbErrorResponse,
+  Time,
+  IGetCandlestick,
+  IGetCandlestickData,
 } from './types';
 
 export default class ApiBithumb {
@@ -95,6 +98,31 @@ export default class ApiBithumb {
     const res = <IGetBtci> await this.requestPublic('btci');
     return res;
   }
+
+  /**
+   * provides a Candlestick data.
+   * https://apidocs.bithumb.com/docs/candlestick
+   */
+  public async GetCandlestick(
+    orderCurrency: string,
+    paymentCurrency: string,
+    chartIntervals: Time,
+  ): Promise<IGetCandlestickData[]> {
+    const endpoint = `/candlestick/${orderCurrency}_${paymentCurrency}`;
+    const res = <IGetCandlestick> await this.requestPublic(endpoint, chartIntervals);
+
+    const candleData: IGetCandlestickData[] = res.data.map((candle) => ({
+      timestamp: candle[0],
+      opening_price: candle[1],
+      closing_price: candle[2],
+      max_price: candle[3],
+      min_price: candle[4],
+      volume: candle[5],
+    }));
+
+    return candleData;
+  }
+
 
   /**
    * Provide information on membership and coin transaction fees.
