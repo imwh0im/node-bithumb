@@ -1,4 +1,4 @@
-import { IBithumbResponse } from './bithumb-response';
+import { IBithumbResponse } from './bithumb-response.interface';
 
 interface IBtciData {
   marker_index: string;

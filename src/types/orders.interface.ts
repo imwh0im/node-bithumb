@@ -1,9 +1,9 @@
-import { IBithumbResponse } from './bithumb-response';
-import { currecnyType } from './currency-i18n';
+import { IBithumbResponse } from './bithumb-response.interface';
+import { currencyType } from './currency-i18n.interface';
 
 interface IOrder {
   order_currency: string;
-  payment_currency: currecnyType;
+  payment_currency: currencyType;
   order_id: string;
   order_data: string;
   type: string;

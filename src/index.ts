@@ -30,7 +30,7 @@ import {
   IPostWithDrawalKrw,
   IBalanceResponse,
   IBithumbErrorResponse,
-} from '../types';
+} from './types';
 
 export default class ApiBithumb {
   constructor(
