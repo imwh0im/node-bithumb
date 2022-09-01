@@ -53,7 +53,7 @@ export default class ApiBithumb {
 
   /**
    * Provides the current price of the asset in the bithumb
-   * https://apidocs.bithumb.com/docs/ticker
+   * https://apidocs.bithumb.com/reference/%ED%98%84%EC%9E%AC%EA%B0%80-%EC%A0%95%EB%B3%B4-%EC%A1%B0%ED%9A%8C
    */
   public async getTicker(coinCode: string): Promise<IGetTicker> {
     const param = `${coinCode}_${this.paymentCurrency}`;
@@ -63,7 +63,7 @@ export default class ApiBithumb {
 
   /**
    * Provides current sales information for assets in the bithumb
-   * https://apidocs.bithumb.com/docs/order_book
+   * https://apidocs.bithumb.com/reference/%ED%98%B8%EA%B0%80-%EC%A0%95%EB%B3%B4-%EC%A1%B0%ED%9A%8C
    */
   public async getOrderBook(coinCode: string): Promise<IGetOrderBook> {
     const param = `${coinCode}_${this.paymentCurrency}`;
@@ -73,7 +73,7 @@ export default class ApiBithumb {
 
   /**
    * Provides details of the completion of the transaction in the bithumb
-   * https://apidocs.bithumb.com/docs/transaction_history
+   * https://apidocs.bithumb.com/reference/%EC%B5%9C%EA%B7%BC-%EC%B2%B4%EA%B2%B0-%EB%82%B4%EC%97%AD
    */
   public async getTransactionHistory(coinCode: string): Promise<IGetTransactionHistory> {
     const param = `${coinCode}_${this.paymentCurrency}`;
@@ -83,7 +83,7 @@ export default class ApiBithumb {
 
   /**
    * Provides information about the status of an asset's deposits and withdrawals in the bithumb
-   * https://apidocs.bithumb.com/docs/assets_status
+   * https://apidocs.bithumb.com/reference/%EC%9E%85%EC%B6%9C%EA%B8%88-%EC%A7%80%EC%9B%90-%ED%98%84%ED%99%A9
    */
   public async getAssetsStatus(orderCurrency: string): Promise<IGetAssetsStatus> {
     const res = <IGetAssetsStatus> await this.requestPublic('assetsstatus', orderCurrency);
@@ -92,7 +92,7 @@ export default class ApiBithumb {
 
   /**
    * Provides Bithumb Index (BTMI, BTAI) information.
-   * https://apidocs.bithumb.com/docs/btci
+   * https://apidocs.bithumb.com/reference/btci-%EB%B9%97%EC%8D%B8%EC%A7%80%EC%88%98
    */
   public async getBtci(): Promise<IGetBtci> {
     const res = <IGetBtci> await this.requestPublic('btci');
@@ -101,7 +101,7 @@ export default class ApiBithumb {
 
   /**
    * provides a Candlestick data.
-   * https://apidocs.bithumb.com/docs/candlestick
+   * https://apidocs.bithumb.com/reference/candlestick-rest-api
    */
   public async GetCandlestick(
     orderCurrency: string,
@@ -126,7 +126,7 @@ export default class ApiBithumb {
 
   /**
    * Provide information on membership and coin transaction fees.
-   * https://apidocs.bithumb.com/docs/account
+   * https://apidocs.bithumb.com/reference/%ED%9A%8C%EC%9B%90-%EC%A0%95%EB%B3%B4-%EC%A1%B0%ED%9A%8C
    */
   public async postAccount(coinCode: string): Promise<IPostAccount> {
     const params = {
@@ -139,7 +139,7 @@ export default class ApiBithumb {
   /**
    * Provide information on assets held by members.
    * This API Response could be change the name on the key.
-   * https://apidocs.bithumb.com/docs/balance
+   * https://apidocs.bithumb.com/reference/%EB%B3%B4%EC%9C%A0%EC%9E%90%EC%82%B0-%EC%A1%B0%ED%9A%8C
    */
   public async postBalance(coinCode = 'BTC'): Promise<IPostBalance> {
     const params = {
@@ -152,7 +152,7 @@ export default class ApiBithumb {
 
   /**
    * Provide the address of the member's coin deposit wallet.
-   * https://apidocs.bithumb.com/docs/wallet_address
+   * https://apidocs.bithumb.com/reference/%EC%9E%85%EA%B8%88%EC%A7%80%EA%B0%91-%EC%A3%BC%EC%86%8C-%EC%A1%B0%ED%9A%8C
    */
   public async postWalletAddress(coinCode?: string): Promise<IPostWalletAddress> {
     const params = {
@@ -164,7 +164,7 @@ export default class ApiBithumb {
 
   /**
    * provides members' virtual asset transaction information.
-   * https://apidocs.bithumb.com/docs/ticker_user
+   * https://apidocs.bithumb.com/reference/%EC%B5%9C%EA%B7%BC-%EA%B1%B0%EB%9E%98%EC%A0%95%EB%B3%B4-%EC%A1%B0%ED%9A%8C
    */
   public async postTickerUser(orderCurrency: string): Promise<IPostTickerUser> {
     const params = {
@@ -176,7 +176,7 @@ export default class ApiBithumb {
 
   /**
    * Provide details of the member's purchase/sale registration waiting or transaction.
-   * https://apidocs.bithumb.com/docs/orders
+   * https://apidocs.bithumb.com/reference/%EA%B1%B0%EB%9E%98-%EC%A3%BC%EB%AC%B8%EB%82%B4%EC%97%AD-%EC%A1%B0%ED%9A%8C
    */
   public async postOrders(params: IPostOrdersParams): Promise<IPostOrders> {
     const param = {
@@ -188,7 +188,7 @@ export default class ApiBithumb {
 
   /**
    * Provide details of the member's purchase/sale details.
-   * https://apidocs.bithumb.com/docs/orders_detail
+   * https://apidocs.bithumb.com/reference/%EA%B1%B0%EB%9E%98-%EC%A3%BC%EB%AC%B8%EB%82%B4%EC%97%AD-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C
    */
   public async postOrderDetail(orderId: string, orderCurrency: string): Promise<IPostOrderDetail> {
     const param = {
@@ -201,7 +201,7 @@ export default class ApiBithumb {
 
   /**
    * Provide information on the member's transaction completion history.
-   * https://apidocs.bithumb.com/docs/transactions
+   * https://apidocs.bithumb.com/reference/%EA%B1%B0%EB%9E%98-%EC%B2%B4%EA%B2%B0%EB%82%B4%EC%97%AD-%EC%A1%B0%ED%9A%8C
    */
   public async postUserTransctions(
     searchGb: number, orderCurrency: string, offset?: number, count?: number,
@@ -218,7 +218,7 @@ export default class ApiBithumb {
 
   /**
    * provides a designated price purchase/sale registration function.
-   * https://apidocs.bithumb.com/docs/place
+   * https://apidocs.bithumb.com/reference/%EC%A7%80%EC%A0%95%EA%B0%80-%EC%A3%BC%EB%AC%B8%ED%95%98%EA%B8%B0
    */
   public async postPlace(orderCurrency: string, units: number, price: number, type: tradeType): Promise<IPostPlace> {
     const param = {
@@ -233,7 +233,7 @@ export default class ApiBithumb {
 
   /**
    * provides a registered purchase/sale order cancellation function.
-   * https://apidocs.bithumb.com/docs/cancel
+   * https://apidocs.bithumb.com/reference/%EC%A3%BC%EB%AC%B8-%EC%B7%A8%EC%86%8C%ED%95%98%EA%B8%B0
    */
   public async postCancel(type: tradeType, orderId: string, orderCurrency: string): Promise<IPostCancel> {
     const param = {
@@ -247,7 +247,7 @@ export default class ApiBithumb {
 
   /**
    * provides market price buying.
-   * https://apidocs.bithumb.com/docs/market_buy
+   * https://apidocs.bithumb.com/reference/%EC%8B%9C%EC%9E%A5%EA%B0%80-%EB%A7%A4%EC%88%98%ED%95%98%EA%B8%B0
    */
   public async postMarketBuy(units: number, orderCurrency: string): Promise<IPostMarketBuy> {
     const param = {
@@ -260,7 +260,7 @@ export default class ApiBithumb {
 
   /**
    * provides market price selling function.
-   * https://apidocs.bithumb.com/docs/market_sell
+   * https://apidocs.bithumb.com/reference/%EC%8B%9C%EC%9E%A5%EA%B0%80-%EB%A7%A4%EB%8F%84%ED%95%98%EA%B8%B0
    */
   public async postMarketSell(units: number, orderCurrency: string): Promise<IPostMarketSell> {
     const param = {
@@ -273,7 +273,7 @@ export default class ApiBithumb {
 
   /**
    * provides a virtual asset withdrawal application function.
-   * https://apidocs.bithumb.com/docs/withdrawal_coin
+   * https://apidocs.bithumb.com/reference/%EC%BD%94%EC%9D%B8-%EC%B6%9C%EA%B8%88%ED%95%98%EA%B8%B0-%EA%B0%9C%EC%9D%B8
    */
   public async postWithdrawalCoin(units: number, address: string, currency = 'BTC', desination?: string): Promise<IPostWithdrawalCoin> {
     const param = {
@@ -287,6 +287,7 @@ export default class ApiBithumb {
   }
 
   /**
+   * @deprecated
    * provides a KRW withdrawal application function.
    * https://apidocs.bithumb.com/docs/withdrawal_krw
    */
