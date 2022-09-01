@@ -25,7 +25,8 @@ $ npm i --save node-bithumb
 ```typescript
 import ApiBithumb from "node-bithumb";
 
-const BithumbApi = new ApiBithumb("apiKey", "secetKey", "BTC");
+/** 'apiKey', 'secretKey', 'payment currency (krw, btc, eth, etc..)' */
+const BithumbApi = new ApiBithumb("apiKey", "secretKey", "BTC");
 
 /** {httpMethod}{ApiEndpoint(to camel case)} [eg. post, order_detail => postOrderDetail()] */
 const buyRes = await BithumbApi.postMarketBuy(10, "ETH");
